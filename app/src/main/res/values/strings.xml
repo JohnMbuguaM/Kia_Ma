@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Kiama Kia Ma</string>
+    <string name="karibu_maina_na_mwagi">Karibu Maina Na Mwagi</string>
+    <string name="passowrd">Passowrd</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="register_here">REGISTER HERE</string>
+    <string name="show_password">Show Password</string>
+    <string name="registered">Not Registered?</string>
+    <string name="finish">Finish?</string>
+    <string name="Finish"><![CDATA[Finish? ----->]]></string>
+    <string name="save">Save</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="kiama_kia_ma">KIAMA KIA MA</string>
+</resources>

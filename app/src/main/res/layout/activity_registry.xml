@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/panton"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".RegistryActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="#050505"
+        android:text="Igera Mtandao Wa Athuri A Kiama"/>
+
+    <ImageView
+        app:srcCompat="@drawable/sheep"
+        android:layout_width="375dp"
+        android:layout_height="150dp"
+        android:layout_margin="30dp"
+        />
+
+
+    <EditText
+        android:drawableLeft="@drawable/user"
+        android:id="@+id/edittext_username"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="-50dp"
+        android:paddingLeft="5dp"
+        android:background="#ffffff"
+        android:hint="@string/email_address"
+        />
+
+    <EditText
+        android:id="@+id/edittext_passward"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_margin="30dp"
+        android:background="#ffffff"
+        android:drawableLeft="@drawable/password"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingLeft="5dp" />
+
+    <EditText
+        android:id="@+id/edittext_cnf_passward"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_margin="0dp"
+        android:background="#ffffff"
+        android:drawableLeft="@drawable/password"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:paddingLeft="5dp" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/showpwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_password"/>
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="#DA0339FC"
+        android:text="@string/save"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/Finish"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/textview_login"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/login"
+            android:textColor="#DA0339FC"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

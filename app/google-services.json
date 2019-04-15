@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "69636006825",
+    "firebase_url": "https://kia-ma-dec42.firebaseio.com",
+    "project_id": "kia-ma-dec42",
+    "storage_bucket": "kia-ma-dec42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69636006825:android:2a330ab6af94282d",
+        "android_client_info": {
+          "package_name": "mbugua.com.kia_ma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69636006825-bf11e0q1vv9ss8dogrfr3nn4tsmgk7ho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mbugua.com.kia_ma",
+            "certificate_hash": "e7150c51ac52b86c0c650ef5d9aff68b6071d109"
+          }
+        },
+        {
+          "client_id": "69636006825-hnff0c50hb8tn7u1f92kfbssj71snkc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAn2AuQk3eFnAb37MlIlJTRJuXI5u_utc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69636006825-hnff0c50hb8tn7u1f92kfbssj71snkc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
