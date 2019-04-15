@@ -19,7 +19,7 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/appColor"
-        app:popupTheme="@style/appColor"
+        app:popupTheme="@style/dullah"
 
 
        />

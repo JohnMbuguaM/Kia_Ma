@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText mTextUsername, mTextpassword;
     Button mButtonLogin;
     TextView mTextViewRegister;
-    CheckBox showpwd;
+    private CheckBox rshowpwd;
 
     private FirebaseAuth mAuth;
     private ProgressBar login_progress;
@@ -50,7 +50,19 @@ public class LoginActivity extends AppCompatActivity {
                 mTextViewRegister = (TextView) findViewById(R.id.textview_register);
                 mButtonLogin = (Button) findViewById(R.id.button_login);
                 login_progress = (ProgressBar) findViewById(R.id.login_progress);
-                showpwd = findViewById(R.id.showpwd);
+
+
+
+                 mTextViewRegister.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent regIntent = new Intent(LoginActivity.this, RegistryActivity.class);
+                        startActivity(regIntent);
+
+
+
+                    }
+                });
 
 
                 mButtonLogin.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +89,8 @@ public class LoginActivity extends AppCompatActivity {
                                  }
 
                              });
-                             showpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                             rshowpwd = findViewById(R.id.showpwd);
+                             rshowpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                  @Override
                                  public void onCheckedChanged(CompoundButton buttonView, boolean b) {
                                      if (b) {

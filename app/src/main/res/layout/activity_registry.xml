@@ -17,7 +17,7 @@
         android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textColor="#050505"
-        android:text="Igera Mtandao Wa Athuri A Kiama"/>
+        android:text="@string/first_header"/>
 
     <ImageView
         app:srcCompat="@drawable/sheep"
@@ -99,6 +99,13 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/reg_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:indeterminate="true"
+        android:visibility="invisible" />
 
 
 </LinearLayout>
