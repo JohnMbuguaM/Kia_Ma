@@ -68,13 +68,13 @@ public class RegistryActivity extends AppCompatActivity {
                                     String errorMessage = task.getException().getMessage();
 
                                     rprogressBar.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(RegistryActivity.this, "Hari hadu wahetia Muthuri---> " + errorMessage, Toast.LENGTH_LONG);
+                                    Toast.makeText(RegistryActivity.this, "Hari hadu wahetia Muthuri---> " + errorMessage, Toast.LENGTH_LONG).show();
                                 }
                             }
 
                         });
                 }else {
-                    Toast.makeText(RegistryActivity.this, "Muthuri Password ciaku citihanaine...cokera", Toast.LENGTH_LONG);
+                    Toast.makeText(RegistryActivity.this, "Muthuri Password ciaku citihanaine...cokera", Toast.LENGTH_LONG).show();
 
 
 

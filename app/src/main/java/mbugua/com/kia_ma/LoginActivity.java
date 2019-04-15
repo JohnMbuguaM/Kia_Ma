@@ -89,22 +89,23 @@ public class LoginActivity extends AppCompatActivity {
                                  }
 
                              });
-                             rshowpwd = findViewById(R.id.showpwd);
-                             rshowpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                 @Override
-                                 public void onCheckedChanged(CompoundButton buttonView, boolean b) {
-                                     if (b) {
-                                         mTextpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                                     } else {
-                                         mTextpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                                     }
-                                 }
-                             });
+
 
                     }
 
             }
 
+        });
+        rshowpwd = findViewById(R.id.showpwd);
+        rshowpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                if (b) {
+                    mTextpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    mTextpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
         });
     }
 
