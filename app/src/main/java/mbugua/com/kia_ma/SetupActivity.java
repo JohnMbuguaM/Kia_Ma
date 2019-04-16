@@ -1,8 +1,10 @@
 package mbugua.com.kia_ma;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SetupActivity extends AppCompatActivity {
+
+
     private CircleImageView setupImage;
 
 
@@ -28,6 +32,7 @@ public class SetupActivity extends AppCompatActivity {
 
 
         setupImage = findViewById(R.id.setup_image);
+
         setupImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +41,7 @@ public class SetupActivity extends AppCompatActivity {
                         if (ContextCompat.checkSelfPermission(SetupActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
                             Toast.makeText(SetupActivity.this, "Permission Denied", Toast.LENGTH_LONG).show();
+                            ActivityCompat.requestPermissions(SetupActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},1 );
                         } else {
 
                             Toast.makeText(SetupActivity.this, "You Already have permission", Toast.LENGTH_LONG).show();
@@ -43,10 +49,8 @@ public class SetupActivity extends AppCompatActivity {
                 }
 
             }
+
         });
-
-
-
 
 
     }

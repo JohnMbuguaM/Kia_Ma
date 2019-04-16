@@ -23,11 +23,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegistryActivity extends AppCompatActivity {
-   private  EditText rTextUsername, rTextpassword, rTextCfmPass;
-   private Button RegisterButton;
+    private EditText rTextUsername, rTextpassword, rTextCfmPass;
+    private Button RegisterButton;
     private TextView RegisterLogin;
     private CheckBox rshowpwd;
-    private ProgressBar rprogressBar;
+    private ProgressBar RegisterProgBar;
     private FirebaseAuth mAuth;
 
 
@@ -38,13 +38,12 @@ public class RegistryActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-
-        rTextUsername = (EditText) findViewById(R.id.edittext_username);
-        rTextpassword = (EditText) findViewById(R.id.edittext_passward);
-        rTextCfmPass = (EditText) findViewById(R.id.edittext_cnf_passward);
-        RegisterButton = (Button) findViewById(R.id.button_register);
-        RegisterLogin = (TextView) findViewById(R.id.register_login);
-        rprogressBar = (ProgressBar) findViewById(R.id.reg_progressBar);
+        rTextUsername = findViewById(R.id.edittext_username);
+        rTextpassword = findViewById(R.id.edittext_passward);
+        rTextCfmPass = findViewById(R.id.edittext_cnf_passward);
+        RegisterButton = findViewById(R.id.button_register);
+        RegisterLogin = findViewById(R.id.register_login);
+        RegisterProgBar = findViewById(R.id.reg_progressBar);
 
         RegisterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,15 +61,16 @@ public class RegistryActivity extends AppCompatActivity {
                 String confirm_pass = rTextCfmPass.getText().toString();
 
 
+                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) & !TextUtils.isEmpty(confirm_pass)) {
 
-                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confirm_pass))
-                {
-                    if (pass.equals(confirm_pass))
-                        rprogressBar.setVisibility(View.VISIBLE);
+
+                    if (pass.equals(confirm_pass)) {
+
+
+                        RegisterProgBar.setVisibility(View.VISIBLE);
                         mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-
 
 
                                 if (task.isSuccessful()) {
@@ -79,76 +79,53 @@ public class RegistryActivity extends AppCompatActivity {
                                     startActivity(setupIntent);
                                     finish();
 
-                                }else {
-                                    String errorMessage = task.getException().getMessage();
 
-                                    rprogressBar.setVisibility(View.INVISIBLE);
+                                } else {
+                                    String errorMessage = task.getException().getMessage();
                                     Toast.makeText(RegistryActivity.this, "Hari hadu wahetia Muthuri---> " + errorMessage, Toast.LENGTH_LONG).show();
                                 }
+
+                                RegisterProgBar.setVisibility(View.INVISIBLE);
                             }
 
                         });
-                }else {
-                    Toast.makeText(RegistryActivity.this, "Muthuri Password ciaku citihanaine...cokera", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(RegistryActivity.this, "Muthuri Password ciaku citihanaine...cokera", Toast.LENGTH_LONG).show();
 
 
+                    }
 
 
                 }
 
+                rshowpwd = findViewById(R.id.showpwd);
+                rshowpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                        if (b) {
+                            rTextpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        } else {
+                            rTextpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        }
+                        if (b) {
+                            rTextCfmPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        } else {
+                            rTextCfmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        }
 
 
-
-            }
-        });
+                    }
 
 
-
-
-
-        rshowpwd = findViewById(R.id.showpwd);
-        rshowpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
-                if (b) {
-                    rTextpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                } else {
-                    rTextpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-                if (b) {
-                    rTextCfmPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }
-                else {
-                    rTextCfmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                }
-
-
-
-
+                });
 
 
             }
 
 
-
         });
-
-
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser !=null) {
-            sendToMain();
-
-        }
-    }
-
-    private void sendToMain() {
-        Intent mainIntent = new Intent(RegistryActivity.this, MainActivity.class );
-        startActivity(mainIntent);
-        finish();
-    }
 }
+
+
