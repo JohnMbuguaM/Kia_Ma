@@ -46,6 +46,13 @@ public class RegistryActivity extends AppCompatActivity {
         rButtonLogin = (Button) findViewById(R.id.button_login);
         rprogressBar = (ProgressBar) findViewById(R.id.reg_progressBar);
 
+        rButtonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         rTextViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +62,7 @@ public class RegistryActivity extends AppCompatActivity {
                 String confirm_pass = rTextCfmPass.getText().toString();
 
 
+
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confirm_pass))
                 {
                     if (pass.equals(confirm_pass))
@@ -62,8 +70,15 @@ public class RegistryActivity extends AppCompatActivity {
                         mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
+
+
                                 if (task.isSuccessful()) {
-                                    sendToMain();
+
+                                    Intent setupIntent = new Intent(RegistryActivity.this, SetupActivity.class);
+                                    startActivity(setupIntent);
+                                    finish();
+
                                 }else {
                                     String errorMessage = task.getException().getMessage();
 
