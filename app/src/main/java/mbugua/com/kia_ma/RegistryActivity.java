@@ -24,8 +24,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegistryActivity extends AppCompatActivity {
    private  EditText rTextUsername, rTextpassword, rTextCfmPass;
-   private Button rButtonLogin;
-    private TextView rTextViewRegister;
+   private Button RegisterButton;
+    private TextView RegisterLogin;
     private CheckBox rshowpwd;
     private ProgressBar rprogressBar;
     private FirebaseAuth mAuth;
@@ -42,11 +42,11 @@ public class RegistryActivity extends AppCompatActivity {
         rTextUsername = (EditText) findViewById(R.id.edittext_username);
         rTextpassword = (EditText) findViewById(R.id.edittext_passward);
         rTextCfmPass = (EditText) findViewById(R.id.edittext_cnf_passward);
-        rTextViewRegister = (TextView) findViewById(R.id.button_register);
-        rButtonLogin = (Button) findViewById(R.id.button_login);
+        RegisterButton = (Button) findViewById(R.id.button_register);
+        RegisterLogin = (TextView) findViewById(R.id.register_login);
         rprogressBar = (ProgressBar) findViewById(R.id.reg_progressBar);
 
-        rButtonLogin.setOnClickListener(new View.OnClickListener() {
+        RegisterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -54,7 +54,7 @@ public class RegistryActivity extends AppCompatActivity {
         });
 
 
-        rTextViewRegister.setOnClickListener(new View.OnClickListener() {
+        RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = rTextUsername.getText().toString();

@@ -72,7 +72,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:background="#DA0339FC"
-        android:text="@string/save"
+        android:text="Register"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -84,16 +84,16 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
-            android:text="@string/Finish"
+            android:text="Already have an account? --->"
             android:textColor="#ffffff" />
 
         <TextView
-            android:id="@+id/textview_login"
+            android:id="@+id/register_login"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
             android:layout_marginTop="20dp"
-            android:text="THAI"
+            android:text="Login"
             android:textColor="#DA0339FC"
             android:textSize="16sp"
             android:textStyle="bold" />
