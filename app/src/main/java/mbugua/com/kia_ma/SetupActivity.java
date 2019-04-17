@@ -56,6 +56,7 @@ public class SetupActivity extends AppCompatActivity {
 
                         CropImage.activity()
                                 .setGuidelines(CropImageView.Guidelines.ON)
+                                .setAspectRatio(1,1)
                                 .start(SetupActivity.this);
                     }
 

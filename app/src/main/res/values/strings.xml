@@ -19,4 +19,10 @@
     <string name="Action_ac_setting">Acount Setting</string>
     <string name="Action_logout">Logout</string>
     <string name="first_header">Igera Mtandao Wa Athuri A Kiama</string>
+    <string name="adika_muhiriga_waku_haha">Adika Muhiriga Waku haha</string>
+    <string name="adika_mbari_yaku_haha">Adika Mbari yaku haha</string>
+    <string name="adika_naba_yaku_ya_thimu_haha">Adika naba yaku ya thimu haha</string>
+    <string name="wi_wa_mwaki_uriku">Wi wa mwaki uriku?</string>
+    <string name="rika_riaku">Rika riaku</string>
+    <string name="adika_ritwa_haha">Adika Ritwa haha</string>
 </resources>
