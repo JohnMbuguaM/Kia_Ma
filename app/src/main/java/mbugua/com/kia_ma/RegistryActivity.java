@@ -79,7 +79,7 @@ public class RegistryActivity extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
 
-                                    Intent mainIntent = new Intent(RegistryActivity.this, MainActivity.class);
+                                    Intent mainIntent = new Intent(RegistryActivity.this, SetupActivity.class);
                                     startActivity(mainIntent);
                                     finish();
 
