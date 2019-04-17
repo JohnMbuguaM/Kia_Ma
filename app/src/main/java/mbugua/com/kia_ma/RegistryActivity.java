@@ -48,7 +48,11 @@ public class RegistryActivity extends AppCompatActivity {
         RegisterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent loginIntent = new Intent(RegistryActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
                 finish();
+
             }
         });
 
@@ -75,8 +79,8 @@ public class RegistryActivity extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
 
-                                    Intent setupIntent = new Intent(RegistryActivity.this, SetupActivity.class);
-                                    startActivity(setupIntent);
+                                    Intent mainIntent = new Intent(RegistryActivity.this, MainActivity.class);
+                                    startActivity(mainIntent);
                                     finish();
 
 
@@ -98,26 +102,29 @@ public class RegistryActivity extends AppCompatActivity {
 
                 }
 
-                rshowpwd = findViewById(R.id.showpwd);
-                rshowpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean b) {
-                        if (b) {
-                            rTextpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        } else {
-                            rTextpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        }
-                        if (b) {
-                            rTextCfmPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        } else {
-                            rTextCfmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        }
 
 
-                    }
+
+            }
 
 
-                });
+
+        });
+
+        rshowpwd = findViewById(R.id.showpwd);
+        rshowpwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                if (b) {
+                    rTextpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    rTextpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                if (b) {
+                    rTextCfmPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    rTextCfmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
 
 
             }
