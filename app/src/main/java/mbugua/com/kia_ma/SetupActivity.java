@@ -20,14 +20,18 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.RequestHandler;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -47,6 +51,7 @@ public class SetupActivity extends AppCompatActivity {
     private EditText edit_Ritwa, edit_Muhiriga, edit_Mbari, edit_Rika, edit_Mwaki,edit_Thimu;
     private Button setup_button;
     private ProgressBar pgBar;
+    private String User_id;
 
 
 
@@ -74,6 +79,7 @@ public class SetupActivity extends AppCompatActivity {
         setSupportActionBar(setupToolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        User_id = firebaseAuth.getCurrentUser().getUid();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference();
@@ -88,22 +94,67 @@ public class SetupActivity extends AppCompatActivity {
         edit_Mwaki = findViewById(R.id.editText_Mwaki);
         edit_Thimu = findViewById(R.id.editText_Thimu);
 
+        firebaseFirestore.collection("Users").document(User_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    if (task.getResult().exists()) {
+                        String Ritwa = task.getResult().getString("Ritwa");
+                        String Muhiriga = task.getResult().getString("Muhiriga");
+                        String Mbari = task.getResult().getString("Mbari");
+                        String Rika = task.getResult().getString("Rika");
+                        String Mwaki = task.getResult().getString("Mwaki");
+                        String Thimu = task.getResult().getString("Thimu");
+                        String image = task.getResult().getString("image");
+
+                        RequestOptions placeholderRequest = new RequestOptions();
+                        placeholderRequest.placeholder(R.drawable.accountpic);
+                        Glide.with(SetupActivity.this).setDefaultRequestOptions(placeholderRequest).load(image).into(setupImage);
+
+
+
+                        edit_Ritwa.setText(Ritwa);
+                        edit_Muhiriga.setText(Muhiriga);
+                        edit_Mbari.setText(Mbari);
+                        edit_Rika.setText(Rika);
+                        edit_Mwaki.setText(Mwaki);
+                        edit_Thimu.setText(Thimu);
+
+
+
+
+
+
+                    }
+
+
+                }else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(SetupActivity.this, "FireStore Retrieve Error" + error, Toast.LENGTH_LONG).show();
+
+                }
+
+
+            }
+        });
+
         setup_button = findViewById(R.id.Setup_button);
         setup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String Ritwa = edit_Ritwa.getText().toString();
-                final String Muhiriga = edit_Muhiriga.getText().toString();
-                final String Mbari = edit_Mbari.getText().toString();
-                final String  Rika = edit_Rika.getText().toString();
-                final String Mwaki = edit_Mwaki.getText().toString();
-                final String Thimu = edit_Thimu.getText().toString();
+                 final String Ritwa = edit_Ritwa.getText().toString();
+                 final String Muhiriga = edit_Muhiriga.getText().toString();
+                 final String Mbari = edit_Mbari.getText().toString();
+                 final String  Rika = edit_Rika.getText().toString();
+                 final String Mwaki = edit_Mwaki.getText().toString();
+                 final String Thimu = edit_Thimu.getText().toString();
 
                 if (!TextUtils.isEmpty(Ritwa) && !TextUtils.isEmpty(Muhiriga) && !TextUtils.isEmpty(Mbari) && !TextUtils.isEmpty(Rika) && !TextUtils.isEmpty(Mwaki) && !TextUtils.isEmpty(Thimu) && mainImageURI != null)
                 {
                     pgBar.setVisibility(View.VISIBLE);
                     final String User_id = firebaseAuth.getCurrentUser().getUid();
-                    StorageReference image_path = storageReference.child("profile_images").child(User_id + "jpg");
+                    final StorageReference image_path = storageReference.child("profile_images").child(User_id + "jpg");
                     image_path.putFile(mainImageURI).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
