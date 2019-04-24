@@ -24,6 +24,7 @@ import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -31,6 +32,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,6 +52,8 @@ public class SetupActivity extends AppCompatActivity {
 
     private StorageReference storageReference;
     private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firebaseFirestore;
+
 
 
 
@@ -61,7 +66,7 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        storageReference= FirebaseStorage.getInstance().getReference();
+
 
 
 
@@ -69,6 +74,9 @@ public class SetupActivity extends AppCompatActivity {
         setSupportActionBar(setupToolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        storageReference= FirebaseStorage.getInstance().getReference();
 
 
         pgBar = findViewById(R.id.setup_progress);
@@ -84,17 +92,17 @@ public class SetupActivity extends AppCompatActivity {
         setup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Ritwa = edit_Ritwa.getText().toString();
-                String Muhiriga = edit_Muhiriga.getText().toString();
-                String Mbari = edit_Mbari.getText().toString();
-                String  Rika = edit_Rika.getText().toString();
-                String Mwaki = edit_Mwaki.getText().toString();
-                String Thimu = edit_Thimu.getText().toString();
+                final String Ritwa = edit_Ritwa.getText().toString();
+                final String Muhiriga = edit_Muhiriga.getText().toString();
+                final String Mbari = edit_Mbari.getText().toString();
+                final String  Rika = edit_Rika.getText().toString();
+                final String Mwaki = edit_Mwaki.getText().toString();
+                final String Thimu = edit_Thimu.getText().toString();
 
                 if (!TextUtils.isEmpty(Ritwa) && !TextUtils.isEmpty(Muhiriga) && !TextUtils.isEmpty(Mbari) && !TextUtils.isEmpty(Rika) && !TextUtils.isEmpty(Mwaki) && !TextUtils.isEmpty(Thimu) && mainImageURI != null)
                 {
                     pgBar.setVisibility(View.VISIBLE);
-                    String User_id = firebaseAuth.getCurrentUser().getUid();
+                    final String User_id = firebaseAuth.getCurrentUser().getUid();
                     StorageReference image_path = storageReference.child("profile_images").child(User_id + "jpg");
                     image_path.putFile(mainImageURI).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -102,9 +110,46 @@ public class SetupActivity extends AppCompatActivity {
 
                                 if (task.isSuccessful())
                                 {
+                                    Task<Uri> image = task.getResult().getMetadata().getReference().getDownloadUrl();
 
-                                    Task<Uri> u = task.getResult().getMetadata().getReference().getDownloadUrl();
-                                    Toast.makeText(SetupActivity.this, "Upload successful " , Toast.LENGTH_LONG).show();
+
+
+                                    Map<String, String> userMap = new HashMap<>();
+                                    userMap.put("image", image.toString());
+                                    userMap.put("Ritwa", Ritwa);
+                                    userMap.put("Muhiriga", Muhiriga);
+                                    userMap.put("Mbari", Mbari);
+                                    userMap.put("Rika", Rika);
+                                    userMap.put("Mwaki", Mwaki);
+                                    userMap.put("Thimu", Thimu);
+
+
+                                    firebaseFirestore.collection("Users").document(User_id).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(SetupActivity.this, "Your profile was successfully updated", Toast.LENGTH_LONG).show();
+
+
+                                                Toast.makeText(SetupActivity.this, "You have successfully updated your Profile ", Toast.LENGTH_LONG).show();
+                                                Intent MainIntent = new Intent (SetupActivity.this, MainActivity.class);
+                                                startActivity(MainIntent);
+
+
+                                            } else {
+
+                                                String error = task.getException().getMessage();
+                                                Toast.makeText(SetupActivity.this, "FireStore Error" + error, Toast.LENGTH_LONG).show();
+
+
+                                            }
+
+                                            pgBar.setVisibility(View.INVISIBLE);
+                                        }
+
+
+                                    });
 
 
                                 }else
@@ -112,9 +157,12 @@ public class SetupActivity extends AppCompatActivity {
                                         String error = task.getException().getMessage();
                                         Toast.makeText(SetupActivity.this, "Error" + error, Toast.LENGTH_LONG).show();
 
+                                        pgBar.setVisibility(View.INVISIBLE);
+
+
 
                                 }
-                            pgBar.setVisibility(View.INVISIBLE);
+
 
                         }
                     });
@@ -124,6 +172,7 @@ public class SetupActivity extends AppCompatActivity {
 
 
                 }else {
+                    Toast.makeText(SetupActivity.this, "Please fill all the parts and select a photo" , Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -140,11 +189,12 @@ public class SetupActivity extends AppCompatActivity {
                         ActivityCompat.requestPermissions(SetupActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                     } else {
 
-                        CropImage.activity()
-                                .setGuidelines(CropImageView.Guidelines.ON)
-                                .setAspectRatio(1,1)
-                                .start(SetupActivity.this);
+                        BringImagePicker();
                     }
+
+                } else {
+
+                    BringImagePicker();
 
                 }
             }
@@ -152,6 +202,14 @@ public class SetupActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void BringImagePicker() {
+
+        CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setAspectRatio(1,1)
+                .start(SetupActivity.this);
     }
 
     @Override

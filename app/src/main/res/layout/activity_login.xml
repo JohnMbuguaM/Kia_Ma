@@ -28,7 +28,7 @@
         android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textColor="#050505"
-        android:text="@string/karibu_maina_na_mwagi"/>
+        android:text="@string/karibu_maina_na_mwangi"/>
 
     <ImageView
         android:layout_width="375dp"
