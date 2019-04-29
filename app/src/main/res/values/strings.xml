@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Kiama Kia Ma</string>
+    <string name="karibu_maina_na_mwagi">Karibu Maina Na Mwagi</string>
+    <string name="passowrd">Passowrd</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="register_here">REGISTER HERE</string>
+    <string name="show_password">Show Password</string>
+    <string name="registered">Not Registered?</string>
+    <string name="finish">Finish?</string>
+    <string name="Finish"><![CDATA[Finish? ----->]]></string>
+    <string name="save">Save</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="kiama_kia_ma">KIAMA KIA MA</string>
+    <string name="Action_search">Search</string>
+    <string name="Action_ac_setting">Acount Setting</string>
+    <string name="Action_logout">Logout</string>
+    <string name="first_header">Igera Mtandao Wa Athuri A Kiama</string>
+    <string name="adika_muhiriga_waku_haha">Adika Muhiriga Waku haha</string>
+    <string name="adika_mbari_yaku_haha">Adika Mbari yaku haha</string>
+    <string name="adika_naba_yaku_ya_thimu_haha">Adika naba yaku ya thimu haha</string>
+    <string name="wi_wa_mwaki_uriku">Wi wa mwaki uriku?</string>
+    <string name="rika_riaku">Rika riaku</string>
+    <string name="adika_ritwa_haha">Adika Ritwa haha</string>
+    <string name="karibu_maina_na_mwangi">Karibu Maina Na Mwangi</string>
+    <string name="kiama_kia_mahp">Kiama KIa Ma</string>
+    <string name="igua_w_m_ci">igua wĩ mũciĩ</string>
+    <string name="igua_w_m_ci1">igua Wĩ mũciĩ</string>
+</resources>
